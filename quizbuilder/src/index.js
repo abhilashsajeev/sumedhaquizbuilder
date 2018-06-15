@@ -1,5 +1,3 @@
-import "materialize-css/dist/css/materialize.min.css";
-import "materialize-css/dist/js/materialize.min.js";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -8,12 +6,16 @@ import reduxThunk from "redux-thunk";
 import reducers from "./reducers";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <React.Fragment>
+      <CssBaseline/>
+      <App />
+    </React.Fragment>
   </Provider>,
   document.getElementById("root")
 );
