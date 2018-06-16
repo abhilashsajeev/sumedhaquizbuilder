@@ -1,21 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { PropTypes } from "react"
+import { withStyles } from '@material-ui/core/styles';
 
-const Preloader = () => {
-  return (
-    <div style={{ marginTop: 50 }} className="preloader-wrapper big active">
-      <div className="spinner-layer spinner-teal-only">
-        <div className="circle-clipper left">
-          <div className="circle" />
-        </div>
-        <div className="gap-patch">
-          <div className="circle" />
-        </div>
-        <div className="circle-clipper right">
-          <div className="circle" />
-        </div>
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
+  wrapper: {
+    textAlign:"center"
+  }
+});
+
+class Preloader extends Component {
+  render() {
+    var { classes } = this.props;
+    return (
+      <div className={classes.wrapper}>
+        <CircularProgress className={classes.progress} color="secondary" />
       </div>
-    </div>
-  );
+    );
+  }
 };
 
-export default Preloader;
+export default withStyles(styles)(Preloader);

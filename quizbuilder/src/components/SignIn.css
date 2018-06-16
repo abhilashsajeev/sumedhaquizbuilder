@@ -9,22 +9,3 @@
   transition: opacity 0.5s;
 }
 
-.social-signin-container {
-  margin-top: 15%;
-}
-
-.social-signin:hover {
-  opacity: 0.9;
-}
-
-.social-signin-icon {
-  padding-right: 15px;
-}
-
-#sign-in {
-  margin-bottom: -20px;
-}
-
-#sign-in-header {
-  margin-bottom: 40px;
-}
