@@ -11,9 +11,8 @@ import Chip from '@material-ui/core/Chip';
 const styles = theme => ({
   card: {
     display: 'flex',
-    width: "85%",
+    maxWidth: "85%",
     margin: 'auto',
-    wordWrap: "break-word"
   },
   details: {
     display: 'flex',
@@ -21,6 +20,7 @@ const styles = theme => ({
   },
   content: {
     flex: '1 0 auto',
+    maxWidth: "100%",
   },
   title: {
     fontSize: 20,
