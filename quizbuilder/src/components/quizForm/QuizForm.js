@@ -71,7 +71,6 @@ class QuizForm extends Component {
     }
     var { addQuestion, auth } = this.props;
     debugger;
-    console.log('add question', addQuestion);
     addQuestion(this.state, auth.uid)
   }
   render() {

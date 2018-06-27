@@ -2,7 +2,6 @@ import { quizRef ,todosRef, authRef, provider } from "../config/firebase";
 import { FETCH_TODOS, FETCH_USER, FETCH_QUIZ } from "./types";
 import {showMessage} from "../reducers/messageReducer";
 export const addQuestion = (newQuestion, uid) => async dispatch => {
-  console.log('inside the addquestion', uid);
   quizRef
     .child(uid)
     .push()
@@ -10,6 +9,11 @@ export const addQuestion = (newQuestion, uid) => async dispatch => {
   dispatch(showMessage("Question saved"))
   
 };
+
+export const showNotifications = message => dispatch => {
+  console.log("calling show message");
+  dispatch(showMessage(message));
+}
 
 export const fetchQuiz = uid => async dispatch => {
   quizRef.on("value", snapshot => {

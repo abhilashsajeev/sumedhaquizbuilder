@@ -13,6 +13,7 @@ class QuizView extends Component {
   }
 
   render() {
+    var {showNotifications} = this.props;
     if (this.props.quiz === "loading") {
       return (
         <div>
@@ -27,7 +28,7 @@ class QuizView extends Component {
         </div>
         {
           map(quiz[auth.uid], (item, index) => {
-            return (<QuizItem key={index} {...item} />)
+            return (<QuizItem key={index} {...item} showNotifications={showNotifications} />)
           })
         }
       </div>

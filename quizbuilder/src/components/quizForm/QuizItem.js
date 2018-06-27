@@ -31,17 +31,22 @@ const styles = theme => ({
 });
 
 class QuizItem extends Component {
+  state = {
+    showAnswer:false
+  }
   handleClick = index => (event) => {
     if(index === this.props.answer){
-      alert("Answer is correct");
+      this.setState({showAnswer:true})
+    } else {
+      this.props.showNotifications("Incorrect answer");
     }
+    
 
-    alert("Incorrect answer");
   }
   render() {
     var props = this.props;
-    console.log(props)
-    var { classes, statements } = props;
+    var {showAnswer} = this.state;
+    var { classes, statements, answer } = props;
     return (
       <div>
         <Card className={classes.card}>
@@ -72,6 +77,11 @@ class QuizItem extends Component {
                 );
 
               })
+            }
+            {
+              showAnswer && (<React.Fragment>
+                <p> The answer is {props.options[answer]} </p>
+              </React.Fragment>)
             }
           </CardContent>
         </Card>
