@@ -69,6 +69,7 @@ class App extends Component {
           <Route path="/quiz" component={requireAuth(asyncQuizForm)} />
           <Route path="/view" component={requireAuth(asyncQuizView)} />
           <Route path="/todo" component={requireAuth(asyncTodo)} />
+          
           <Message />
         </div>
       </BrowserRouter>
