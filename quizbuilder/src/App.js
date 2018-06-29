@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import ToDoList from "./components/TodoList";
 import SignIn from "./components/SignIn";
 import requireAuth from "./components/auth/requireAuth";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "./actions";
 import { compose } from "recompose";
-import QuizForm from "./components/quizForm/QuizForm";
-import QuizView from "./components/quizForm/quizView";
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import { Typography, Button, Toolbar } from '@material-ui/core';
 import Message from './components/Message'
 import { NavLink } from 'react-router-dom'
+import asyncComponent from "./components/hoc/asyncComponent";
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -29,6 +28,18 @@ const styles = {
     color: "white"
   }
 };
+
+let asyncQuizView  = asyncComponent(()=> {
+  return import("./components/quizForm/quizView");
+});
+
+let asyncTodo  = asyncComponent(()=> {
+  return import("./components/TodoList")
+});
+let asyncQuizForm  = asyncComponent(()=> {
+  return import("./components/quizForm/QuizForm")
+});
+
 
 class App extends Component {
   componentWillMount() {
@@ -55,9 +66,9 @@ class App extends Component {
             </Toolbar>
           </AppBar>
           <Route exact path="/" component={SignIn} />
-          <Route path="/quiz" component={requireAuth(QuizForm)} />
-          <Route path="/view" component={requireAuth(QuizView)} />
-          <Route path="/app" component={requireAuth(ToDoList)} />
+          <Route path="/quiz" component={requireAuth(asyncQuizForm)} />
+          <Route path="/view" component={requireAuth(asyncQuizView)} />
+          <Route path="/todo" component={requireAuth(asyncTodo)} />
           <Message />
         </div>
       </BrowserRouter>
