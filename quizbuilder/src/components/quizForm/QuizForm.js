@@ -73,6 +73,23 @@ class QuizForm extends Component {
     debugger;
     addQuestion(this.state, auth.uid)
   }
+
+  renderOptions = () => {
+    return (
+      this.state.statements.map((item, index) => {
+        return (
+          <TextField
+            key={index}
+            label={"Statement - " + (index + 1)}
+            value={item}
+            margin="normal"
+            onChange={this.handleStateMentChange(index)}
+            fullWidth
+          />
+        )
+      })
+    )
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -102,18 +119,7 @@ class QuizForm extends Component {
           <Grid lg={8} sm={6}
             md={8} item>
             {
-              this.state.statements.map((item, index) => {
-                return (
-                  <TextField
-                    key={index}
-                    label={"Statement - " + (index + 1)}
-                    value={item}
-                    margin="normal"
-                    onChange={this.handleStateMentChange(index)}
-                    fullWidth
-                  />
-                )
-              })
+              this.renderOptions()
             }
           </Grid>
         </Grid>
