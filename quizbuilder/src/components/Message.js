@@ -6,7 +6,8 @@ const Message =  ({message})=> (
     message ? <Snackbar
       open={true}
       message={message}
-      autoHideDuration={4000}
+      autoHideDuration={3000}
+      disableWindowBlurListener={true}
     />: null
 );
 

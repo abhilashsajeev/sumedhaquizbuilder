@@ -64,6 +64,9 @@ class App extends Component {
           <Button>
             <NavLink className={classes.remoteDeco} to="/quiz"> Quiz </NavLink>
           </Button>
+          <Button>
+            <NavLink className={classes.remoteDeco} to="/create-test"> Create test </NavLink>
+          </Button>
           <Button onClick={this.handleSignOut}>
             logout
         </Button>
@@ -93,6 +96,8 @@ class App extends Component {
           <Route path="/quiz" component={requireAuth(asyncQuizForm)} />
           <Route path="/view" component={requireAuth(asyncQuizView)} />
           <Route path="/todo" component={requireAuth(asyncTodo)} />
+          <Route path="/create-test" component={requireAuth(asyncTodo)} />
+          
           <Message />
         </div>
       </BrowserRouter>

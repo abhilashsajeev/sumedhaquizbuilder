@@ -1,13 +1,14 @@
-import { quizRef ,todosRef, authRef, provider } from "../config/firebase";
+import { quizRef, todosRef, authRef, provider } from "../config/firebase";
 import { FETCH_TODOS, FETCH_USER, FETCH_QUIZ } from "./types";
-import {showMessage} from "../reducers/messageReducer";
+import { showMessage } from "../reducers/messageReducer";
+
 export const addQuestion = (newQuestion, uid) => async dispatch => {
   quizRef
     .child(uid)
     .push()
     .set(newQuestion)
   dispatch(showMessage("Question saved"))
-  
+
 };
 
 export const showNotifications = message => dispatch => {
@@ -29,6 +30,7 @@ export const addToDo = (newToDo, uid) => async dispatch => {
     .child(uid)
     .push()
     .set(newToDo);
+    dispatch(showMessage("Completed adding todos"))
 };
 
 export const completeToDo = (completeToDoId, uid) => async dispatch => {
@@ -66,7 +68,7 @@ export const fetchUser = () => dispatch => {
 export const signIn = () => dispatch => {
   authRef
     .signInWithPopup(provider)
-    .then(result => {console.log("login success")})
+    .then(result => { console.log("login success") })
     .catch(error => {
       console.log(error);
     });

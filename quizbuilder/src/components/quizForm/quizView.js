@@ -21,13 +21,15 @@ class QuizView extends Component {
         </div>
       );
     }
-    var { quiz, auth } = this.props;
+    let { quiz } = this.props;
+    let key = Object.keys(quiz)[0]
+    console.log(quiz);
     return (
       <div>
         <div className="row">
         </div>
         {
-          map(quiz[auth.uid], (item, index) => {
+          map(quiz[key], (item, index) => {
             return (<QuizItem key={index} {...item} showNotifications={showNotifications} />)
           })
         }

@@ -6,7 +6,7 @@ import { Typography } from "@material-ui/core";
 import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
+import {Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
 
 const styles = theme => ({
   card: {
@@ -25,27 +25,31 @@ const styles = theme => ({
   title: {
     fontSize: 20,
   },
-  chip: {
+  radio: {
     margin: theme.spacing.unit
   }
 });
 
 class QuizItem extends Component {
   state = {
-    showAnswer:false
+    showAnswer: false,
+    value: null
   }
-  handleClick = index => (event) => {
-    if(index === this.props.answer){
-      this.setState({showAnswer:true})
+  handleClick = (event) => {
+    var {answer, options} = this.props;
+    console.log(" evetn target", event.target.value);
+    if (event.target.value === options[answer]) {
+      this.setState({ showAnswer: true, value:event.target.value })
     } else {
+      this.setState({value: event.target.value})
       this.props.showNotifications("Incorrect answer");
     }
-    
+
 
   }
   render() {
     var props = this.props;
-    var {showAnswer} = this.state;
+    var { showAnswer } = this.state;
     var { classes, statements, answer } = props;
     return (
       <div>
@@ -64,31 +68,32 @@ class QuizItem extends Component {
                 )
               })}
             </List>
-            {
-              props.options.map((item, index) => {
-                return (
-                  <React.Fragment key={index}>
-                    <Chip className={classes.chip} 
-                      label={item}
-                      onClick={this.handleClick(index)}
-                      avatar={<Avatar>{index + 1}</Avatar>}
-                    />
-                  </React.Fragment>
-                );
+            <RadioGroup
+              aria-label="Answer"
+              name="answer"
+              value={this.state.value}
+              onChange={this.handleClick}
+            >
+              {
+                props.options.map((item, index) => {
+                  return (
+                    <FormControlLabel key={index} value={item} control={<Radio />} label={item} />
+                  );
 
-              })
-            }
-            {
-              showAnswer && (<React.Fragment>
-                <p> The answer is {props.options[answer]} </p>
-              </React.Fragment>)
-            }
+                })
+              }
+              </RadioGroup>
+              {
+                showAnswer && (<React.Fragment>
+                  <p> The answer is {props.options[answer]} </p>
+                </React.Fragment>)
+              }
           </CardContent>
         </Card>
       </div>
-    )
-
-  }
-}
-
+        )
+    
+      }
+    }
+    
 export default withStyles(styles)(QuizItem);
